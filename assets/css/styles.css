@@ -1,2 +1,27 @@
-
 /* css */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 40px;
+  font-family: 'Signika', sans-serif;
+  scroll-behavior: smooth;
+}
+section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#intro{
+
+}
+
+img{
+  width: 10vw;
+  height: 10vw;
+}
