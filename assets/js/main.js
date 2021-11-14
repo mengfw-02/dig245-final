@@ -1,9 +1,12 @@
 /* javascript */
+var input;
 $(document).ready(function() {
-  var input;
   $("form").on('submit',function(event) {
-    input = $( "habitInput" ).first().val();
+    // input = $( "habitInput" ).val();
+    input = document.getElementById("habitInput").value;
     console.log(input);
+  $(".next_button").css("visibility", "visible");
+    // document.getElementById("habit").innerHTML = input;
     event.preventDefault();
   });
   // $("submit_habit").click(function() {
@@ -17,5 +20,4 @@ $(document).ready(function() {
   //     console.log("sucess");
   //   }
   // });
-
 });

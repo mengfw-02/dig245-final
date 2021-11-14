@@ -1,0 +1,47 @@
+/* css */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 40px;
+  font-family: 'Signika', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.header{
+  background-color: black;
+  color: white;
+  padding-bottom: 15px;
+}
+img{
+  width: 10vw;
+  height: 10vw;
+}
+
+.bubble {
+  position: relative;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  width: 300px;
+  background: #000;
+  border-radius: 40px;
+  padding: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.bubble-bottom-left:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 24px solid #000;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #000;
+  border-bottom: 20px solid transparent;
+  left: 32px;
+  bottom: -24px;
+}
