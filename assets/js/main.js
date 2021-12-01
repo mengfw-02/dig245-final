@@ -59,38 +59,38 @@ function get_cookies_array() {
 
 
 //Bot Page
-$(document).ready(function() {
-  $("#amazon").hide();
-  $("#progress").hide();
-
-});
-if (document.getElementById("amazonLink") != null) {
-  document.getElementById("amazonLink").href += habit;
-}
-
-$("#yes").click(function() {
-  $("#yes").hide();
-  $("#no").hide();
-  $("#amazon").show();
-});
-
-$("#no").click(function() {
-  console.log(counter);
-  $("#yes").hide();
-  $("#no").hide();
-  $("#amazon").show();
-});
-
-$("#amazonLink").click(function() {
-  console.log(counter);
-  $("#nothx").hide();
-  $("#progress").show();
-});
-$("#nothx").click(function() {
-  console.log(counter);
-  $("#nothx").hide();
-  $("#progress").show();
-});
+// $(document).ready(function() {
+//   $("#amazon").hide();
+//   $("#progress").hide();
+//
+// });
+// if (document.getElementById("amazonLink") != null) {
+//   document.getElementById("amazonLink").href += habit;
+// }
+//
+// $("#yes").click(function() {
+//   $("#yes").hide();
+//   $("#no").hide();
+//   $("#amazon").show();
+// });
+//
+// $("#no").click(function() {
+//   console.log(counter);
+//   $("#yes").hide();
+//   $("#no").hide();
+//   $("#amazon").show();
+// });
+//
+// $("#amazonLink").click(function() {
+//   console.log(counter);
+//   $("#nothx").hide();
+//   $("#progress").show();
+// });
+// $("#nothx").click(function() {
+//   console.log(counter);
+//   $("#nothx").hide();
+//   $("#progress").show();
+// });
 
 //Progress page
 var storage = get_cookies_array();
