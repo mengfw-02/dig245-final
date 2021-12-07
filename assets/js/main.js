@@ -62,7 +62,7 @@ $(document).ready(function() {
 
 
   //Bot Page
-  var habitToCheck = "";
+  var habitToCheck;
   var storage = get_cookies_array();
   var habitsArray = [];
   for (var names in storage) {
@@ -79,28 +79,29 @@ $(document).ready(function() {
         id: 'habits',
         name: 'habits'
       })
-    )
+    );
 
   for (const val of habitsArray) {
     $('#habits').append($(document.createElement('option')).prop({
       value: val,
       text: val.charAt(0).toUpperCase() + val.slice(1)
-    }))
-  };
+    }));
+  }
 
   $('#generate').click(function() {
     var e = document.getElementById("habits");
-    habitToCheck = e.options[e.selectedIndex].text;
-    // console.log(habitToCheck)
+    habitToCheck = e.options[e.selectedIndex].value;
+    if (document.getElementById("amazonLink") != null) {
+      document.getElementById("amazonLink").href += String(habitToCheck);
+      console.log(document.getElementById("amazonLink").href);
+      console.log(storage[habitToCheck]);
+    }
   });
-  habitToCheck += '';
-  if (document.getElementById("amazonLink") != null) {
-    document.getElementById("amazonLink").href += habitToCheck;
-    console.log(document.getElementById("amazonLink").href);
-    console.log(habitToCheck);
-  }
+
 
   //Progress page
+  console.log(habitToCheck);
+  console.log(storage[habitToCheck]);
   storage = get_cookies_array();
   for (var name in storage) {
     if (document.getElementById("data") != null) {
