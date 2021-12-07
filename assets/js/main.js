@@ -1,4 +1,5 @@
 /* javascript */
+
 $(document).ready(function() {
   function setCookie(cname, cvalue, exdays) {
     const d = new Date();
@@ -28,16 +29,6 @@ $(document).ready(function() {
     document.cookie = name + '=; Max-Age=-99999999;';
   }
 
-  $("#toBuild").hide();
-  $("form").on('submit', function(event) {
-    event.preventDefault();
-    let val = document.getElementById("habitInput").value;
-    console.log(val);
-    checkCookie(val);
-    $("#toBuild").show();
-    return false;
-  })
-
   function checkCookie(name) {
     let cookieVal = Number(getCookie(name));
     console.log("checkCookie()", cookieVal)
@@ -65,6 +56,21 @@ $(document).ready(function() {
     return cookies;
   }
 
+  //Start Page
+  $(".added").hide();
+  $(".warning").hide();
+  $("form").on('submit', function(event) {
+    event.preventDefault();
+    let val = document.getElementById("habitInput").value;
+    if (val != "" && val != null) {
+      checkCookie(val);
+      $(".added").show().delay(1000).fadeOut();
+      $(".warning").hide();
+    } else {
+      $(".warning").show();
+    }
+    return false;
+  })
 
   //Bot Page
   var habitToCheck;
@@ -77,7 +83,7 @@ $(document).ready(function() {
     .append(
       $(document.createElement('label')).prop({
         for: 'habits'
-      }).html('Choose your habit: ')
+      }).html('Today, I have completed: ')
     )
     .append(
       $(document.createElement('select')).prop({
@@ -93,21 +99,59 @@ $(document).ready(function() {
     }));
   }
 
+  $(".added").hide();
+  $(".amazon").hide();
+  $(".garden").hide();
+
+  var i = 0;
+  var txt = "Hello welcome back! Which habit have you completed it?";
+  var j = 0;
+  var txt2 = "My friend Alexa has something for you. Would you like to check it out?";
+  var speed = 30;
+  var speed2 = 30;
+  var timer = typeWriter();
+
+
+  function typeWriter() {
+    var ans;
+    if (i < txt.length) {
+      document.getElementById("dialog1").innerHTML += txt.charAt(i);
+      i++;
+      ans = setTimeout(typeWriter, speed);
+    }
+    return ans;
+  }
+
+  function typeWriter2() {
+    // clearInterval(timer);
+    if (j < txt2.length) {
+      document.getElementById("dialog2").innerHTML += txt2.charAt(j);
+      j++;
+      setTimeout(typeWriter2, speed2);
+    }
+  }
   $('#generate').click(function() {
     var e = document.getElementById("habits");
     habitToCheck = e.options[e.selectedIndex].value;
+    $(".amazon").show();
     if (document.getElementById("amazonLink") != null) {
-      document.getElementById("amazonLink").href += String(habitToCheck);
+      document.getElementById("amazonLink").href = "https://www.amazon.com/s?k=" + String(habitToCheck);
       checkCookie(habitToCheck);
-      console.log(document.getElementById("amazonLink").href);
-      console.log(storage[habitToCheck]);
     }
+    $(".added").show().delay(1000).fadeOut();
+  });
+  if (!($("#elmentid").is(':hidden'))) {
+    typeWriter2();
+  }
+
+  $("#amazonLink").click(function() {
+    $(".garden").show();
+  });
+  $("#nothx").click(function() {
+    $(".garden").show();
   });
 
-
   //Progress page
-  // console.log(habitToCheck);
-  // console.log(storage[habitToCheck]);
   storage = get_cookies_array();
   for (var name in storage) {
     if (document.getElementById("data") != null) {
