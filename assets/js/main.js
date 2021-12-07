@@ -23,6 +23,11 @@ $(document).ready(function() {
     }
     return "";
   }
+
+  function eraseCookie(name) {
+    document.cookie = name + '=; Max-Age=-99999999;';
+  }
+
   $("#toBuild").hide();
   $("form").on('submit', function(event) {
     event.preventDefault();
@@ -93,6 +98,7 @@ $(document).ready(function() {
     habitToCheck = e.options[e.selectedIndex].value;
     if (document.getElementById("amazonLink") != null) {
       document.getElementById("amazonLink").href += String(habitToCheck);
+      storage[habitToCheck]++;
       console.log(document.getElementById("amazonLink").href);
       console.log(storage[habitToCheck]);
     }
@@ -100,8 +106,8 @@ $(document).ready(function() {
 
 
   //Progress page
-  console.log(habitToCheck);
-  console.log(storage[habitToCheck]);
+  // console.log(habitToCheck);
+  // console.log(storage[habitToCheck]);
   storage = get_cookies_array();
   for (var name in storage) {
     if (document.getElementById("data") != null) {
