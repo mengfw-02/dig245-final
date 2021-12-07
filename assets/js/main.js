@@ -98,7 +98,7 @@ $(document).ready(function() {
     habitToCheck = e.options[e.selectedIndex].value;
     if (document.getElementById("amazonLink") != null) {
       document.getElementById("amazonLink").href += String(habitToCheck);
-      storage[habitToCheck]++;
+      checkCookie(habitToCheck);
       console.log(document.getElementById("amazonLink").href);
       console.log(storage[habitToCheck]);
     }
