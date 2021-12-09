@@ -62,7 +62,7 @@ section {
 .scroll-down::before {
   top: 40%;
   animation-delay: 0.3s;
-  /* animation: scroll-down 1s ease-in-out infinite; */
+  animation: scroll-down 1s ease-in-out infinite;
 }
 
 #sec-1 {
@@ -74,7 +74,6 @@ section {
 }
 
 #position {
-  position: ;
   bottom: 8px;
   left: 50%;
 }
