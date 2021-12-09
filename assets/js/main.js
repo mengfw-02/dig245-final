@@ -114,7 +114,7 @@ $(document).ready(function() {
 
   function typeWriter() {
     var ans;
-    if (i < txt.length) {
+    if (i < txt.length && document.getElementById("dialog1") != null) {
       document.getElementById("dialog1").innerHTML += txt.charAt(i);
       i++;
       ans = setTimeout(typeWriter, speed);
@@ -124,7 +124,7 @@ $(document).ready(function() {
 
   function typeWriter2() {
     // clearInterval(timer);
-    if (j < txt2.length) {
+    if (j < txt2.length && document.getElementById("dialog2") != null) {
       document.getElementById("dialog2").innerHTML += txt2.charAt(j);
       j++;
       setTimeout(typeWriter2, speed2);
@@ -140,6 +140,7 @@ $(document).ready(function() {
     }
     $(".added").show().delay(1000).fadeOut();
   });
+
   if (!($("#elmentid").is(':hidden'))) {
     typeWriter2();
   }
@@ -152,11 +153,109 @@ $(document).ready(function() {
   });
 
   //Progress page
-  storage = get_cookies_array();
-  for (var name in storage) {
-    if (document.getElementById("data") != null) {
-      document.getElementById("data").innerHTML += name + " : have completed " + (storage[name] - 1) + " days <br />";
+  //section3
+  var min = 1000;
+  var max = -1000;
+  var minName;
+  var maxName;
+  var count = 0;
+  if (storage == null) {
+    $("#best").html("I have no records of you =(");
+    $("#worst").html("I have no records of you =(");
+  } else {
+    for (var name in storage) {
+      if (document.getElementById("data") != null) {
+        document.getElementById("data").innerHTML += name + " : have completed " + (storage[name] - 1) + " days <br />";
+      }
     }
-  }
+    for (var name2 in storage) {
+      if ((storage[name2] - 1) < min) {
+        minName = name2;
+        min2 = (storage[name2] - 1);
+      }
+      if ((storage[name2] - 1) > max) {
+        maxName = name2;
+        max = (storage[name2] - 1);
+      }
+    }
+    $("#best").html(maxName);
+    $("#worst").html(minName);
+    //section4
+    $(".sunflower").hide();
+    $('#flowerSelection')
+      .append(
+        $(document.createElement('label')).prop({
+          for: 'habit'
+        }).html('I want to see: ')
+      )
+      .append(
+        $(document.createElement('select')).prop({
+          id: 'habit',
+          name: 'habit'
+        })
+      );
 
+    for (var val of habitsArray) {
+      $('#habit').append($(document.createElement('option')).prop({
+        value: val,
+        text: val.charAt(0).toUpperCase() + val.slice(1)
+      }));
+    }
+
+
+    $('#flowering').click(function() {
+      var e = document.getElementById("habit");
+      habitToCheck = e.options[e.selectedIndex].value;
+      $(".sunflower").show();
+      if ((storage[habitToCheck] - 1) <= 6) {
+        $(".caption").html("You are on your way to earning your first petal!");
+        $(".petals0").show();
+        $(".petals1").hide();
+        $(".petals2").hide();
+        $(".petals3").hide();
+        $(".petals4").hide();
+        $(".petals5").hide();
+      } else if ((storage[habitToCheck] - 1) > 6 && (storage[habitToCheck] - 1) <= 12) {
+        $(".caption").html("You are 4 petals away!");
+        $(".petals0").hide();
+        $(".petals1").show();
+        $(".petals2").hide();
+        $(".petals3").hide();
+        $(".petals4").hide();
+        $(".petals5").hide();
+      } else if ((storage[habitToCheck] - 1) > 12 && (storage[habitToCheck] - 1) <= 18) {
+        $(".caption").html("You are 3 petals away!");
+        $(".petals0").hide();
+        $(".petals1").hide();
+        $(".petals2").show();
+        $(".petals3").hide();
+        $(".petals4").hide();
+        $(".petals5").hide();
+      } else if ((storage[habitToCheck] - 1) > 18 && (storage[habitToCheck] - 1) <= 24) {
+        $(".caption").html("You are 2 petals away!");
+        $(".petals0").hide();
+        $(".petals1").hide();
+        $(".petals2").hide();
+        $(".petals3").show();
+        $(".petals4").hide();
+        $(".petals5").hide();
+      } else if ((storage[habitToCheck] - 1) > 24 && (storage[habitToCheck] - 1) < 30) {
+        $(".caption").html("You are 1 petal away!");
+        $(".petals0").hide();
+        $(".petals1").hide();
+        $(".petals2").hide();
+        $(".petals3").hide();
+        $(".petals4").show();
+        $(".petals5").hide();
+      } else if ((storage[habitToCheck] - 1) == 30) {
+        $(".caption").html("Congrats! You have reached your 30 days completion!");
+        $(".petals0").hide();
+        $(".petals1").hide();
+        $(".petals2").hide();
+        $(".petals3").hide();
+        $(".petals4").hide();
+        $(".petals5").show();
+      }
+    });
+  }
 });
